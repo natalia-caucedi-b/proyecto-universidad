@@ -1,0 +1,131 @@
+/* Contenedor general del carrito */
+.carrito-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fffaf0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Título del carrito */
+.carrito-titulo {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #6b3e26;
+}
+
+/* Lista de productos */
+.productos-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Tarjeta de producto */
+.producto-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  width: 200px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.producto-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Imagen del producto */
+.producto-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* Nombre y descripción */
+.producto-nombre {
+  font-size: 1.2rem;
+  margin: 5px 0;
+  color: #4b2e2e;
+}
+
+.producto-desc {
+  font-size: 0.9rem;
+  color: #5a4a3c;
+}
+
+/* Contenedor del botón */
+.boton-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* Estilo del botón */
+.btn-pedir {
+  background-color: #6b3e26;
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-pedir:hover {
+  background-color: #8b5e3c;
+  transform: translateY(-2px);
+}
+
+/* Mensaje de carrito vacío */
+.carrito-vacio {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #a87c5a;
+  margin-top: 20px;
+}
+
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #f3e8ff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #7b2cbf;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #6b4f9c;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #9b5de5;
+}

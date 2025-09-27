@@ -1,0 +1,158 @@
+<div style="display: flex; justify-content: end;">
+  <button
+    pButton
+    type="button"
+    label="Cerrar sesión"
+    class="p-mb-4 add-button"
+    (click)="cerrarSesion()"
+  ></button>
+</div>
+
+<div class="container">
+  <h1 class="main-title">Gestión de Productos de Crochet</h1>
+  <h3 class="subtitle">Administra los productos disponibles en tu tienda</h3>
+
+  <button
+    pButton
+    type="button"
+    label="Agregar Producto"
+    icon="pi pi-plus"
+    class="p-mb-4 add-button"
+    (click)="mostrarDialog()"
+  ></button>
+
+  <p-table
+    [value]="productos"
+    [paginator]="true"
+    [rows]="5"
+    class="product-table"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Imagen</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-producto>
+      <tr>
+        <td>{{ producto.nombre }}</td>
+        <td>
+          <img
+            [src]="producto.imagen"
+            alt="{{ producto.nombre }}"
+            width="80"
+            class="product-image"
+          />
+        </td>
+        <td>{{ producto.descripcion }}</td>
+        <td>
+          <button
+            pButton
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-sm p-button-info action-btn"
+            (click)="editarProducto(producto)"
+            pTooltip="Editar producto"
+            tooltipPosition="top"
+          ></button>
+
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-sm p-button-danger action-btn"
+            (click)="eliminarProducto(producto)"
+            pTooltip="Eliminar producto"
+            tooltipPosition="top"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-dialog
+    header="Nuevo Producto"
+    [(visible)]="productoDialog"
+    [modal]="true"
+    [closable]="false"
+    [style]="{ width: '450px' }"
+  >
+    <form
+      [formGroup]="productoForm"
+      (ngSubmit)="guardarProducto()"
+      class="product-form"
+    >
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12">
+          <label for="nombre">Nombre <span class="required">*</span></label>
+          <input id="nombre" type="text" pInputText formControlName="nombre" />
+          <small
+            *ngIf="
+              productoForm.get('nombre')?.invalid &&
+              productoForm.get('nombre')?.touched
+            "
+            class="p-error"
+          >
+            El nombre es requerido.
+          </small>
+        </div>
+
+        <div class="p-field p-col-12">
+          <label for="descripcion">Descripción <span class="required">*</span></label>
+          <input id="descripcion" type="text" pInputText formControlName="descripcion" />
+          <small
+            *ngIf="
+              productoForm.get('descripcion')?.invalid &&
+              productoForm.get('descripcion')?.touched
+            "
+            class="p-error"
+          >
+            La descripción es requerida.
+          </small>
+        </div>
+
+        <div class="p-field p-col-12">
+          <label for="imagen">Imagen</label>
+          <input
+            id="imagen"
+            type="file"
+            (change)="onFileSelected($event)"
+            accept="image/*"
+          />
+          <small *ngIf="imagenPreview" class="preview-label">Vista previa:</small>
+          <img
+            *ngIf="imagenPreview"
+            [src]="imagenPreview"
+            alt="Imagen seleccionada"
+            width="120"
+            style="display: block; margin-top: 8px; border-radius: 4px"
+          />
+        </div>
+      </div>
+
+      <!-- Footer correcto del diálogo -->
+      <ng-template pTemplate="footer">
+        <div class="dialog-footer">
+          <button
+            pButton
+            type="submit"
+            label="Guardar"
+            icon="pi pi-check"
+            [disabled]="productoForm.invalid"
+            class="save-btn"
+          ></button>
+
+          <button
+            pButton
+            type="button"
+            label="Cancelar"
+            icon="pi pi-times"
+            class="p-button-secondary cancel-btn"
+            (click)="cancelar()"
+          ></button>
+        </div>
+      </ng-template>
+    </form>
+  </p-dialog>
+</div>

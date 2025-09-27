@@ -1,0 +1,31 @@
+<nav class="navbar">
+  <div class="logo">Mis Tejidos</div>
+  <ul class="nav-links">
+    <li><a routerLink="/home">Inicio</a></li>
+  </ul>
+</nav>
+
+<section class="carrito-container">
+  <h2 class="carrito-titulo">Carrito de Compras</h2>
+
+  <div *ngIf="carrito.length > 0; else vacio" class="productos-lista">
+    <div *ngFor="let item of carrito" class="producto-card">
+      <img [src]="item.imagen" [alt]="item.nombre" class="producto-img" />
+      <div class="producto-info">
+        <h3 class="producto-nombre">{{ item.nombre }}</h3>
+        <p class="producto-desc">{{ item.descripcion }}</p>
+      </div>
+    </div>
+
+    <!-- Botón Pedir Productos fuera del *ngFor -->
+    <div class="boton-container">
+      <button class="btn-pedir" (click)="pedirProductos()">
+        Pedir Productos
+      </button>
+    </div>
+  </div>
+
+  <ng-template #vacio>
+    <p class="carrito-vacio">Tu carrito está vacío 🛒</p>
+  </ng-template>
+</section>

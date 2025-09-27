@@ -1,0 +1,41 @@
+<!-- <section class="galeria">
+  <h2>Galeria de Productos</h2>
+  <div class="productos">
+    <div class="producto" *ngFor="let item of productos">
+      <img [src]="item.imagen" [alt]="item.nombre" />
+      <h3>{{ item.nombre }}</h3>
+    </div>
+  </div>
+</section> -->
+
+<section class="galeria">
+  <h2>Nuestros Productos</h2>
+
+  <div class="card">
+    <p-carousel
+      [value]="productos"
+      [numVisible]="3"
+      [numScroll]="1"
+      [circular]="true"
+      [responsiveOptions]="responsiveOptions"
+      autoplayInterval="3000"
+    >
+      <ng-template let-producto #item>
+        <div
+          class="border border-surface-200 dark:border-surface-700 rounded m-2 p-4"
+        >
+          <div class="mb-4">
+            <div class="relative mx-auto">
+              <img
+                width="200px"
+                [src]="producto.imagen"
+                [alt]="producto.nombre"
+              />
+            </div>
+          </div>
+          <div class="mb-4 font-medium">{{ producto.name }}</div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+</section>
