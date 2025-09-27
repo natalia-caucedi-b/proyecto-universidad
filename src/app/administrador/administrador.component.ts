@@ -31,7 +31,7 @@ export class AdministradorComponent implements OnInit {
   productos = [
     {
       nombre: 'Amigurumi de gato',
-      imagen: 'assets/img/amigurumis.jpg',
+      imagen: 'assets/img/amigurumi.png',
       descripcion: 'Hecho a mano con hilo de algodón suave.',
     },
     {
@@ -97,12 +97,19 @@ export class AdministradorComponent implements OnInit {
     this.productoDialog = true;
   }
 
-   guardarProducto() {
+  guardarProducto() {
     if (this.productoForm.valid) {
-      this.productos.push(this.productoForm.value);
-      this.productoDialog = false;
-      console.log(this.productos)
+      // this.productos.push(this.productoForm.value);
+      const nuevoProducto = { ...this.productoForm.value };
+      // 🔹 Importante: crear un nuevo array para que Angular detecte el cambio
+    this.productos = [...this.productos, nuevoProducto];
+
+    this.productoDialog = false;
+    this.productoForm.reset();
+    this.imagenPreview = null;
     }
+
+    
   }
 
   cancelar() {
@@ -118,8 +125,8 @@ export class AdministradorComponent implements OnInit {
     this.productos = this.productos.filter((p) => p !== producto);
   }
 
-  cerrarSesion() {   
-    console.log("pasa por aqui")
-    this.router.navigate(['/inicio']); 
+  cerrarSesion() {
+    console.log('pasa por aqui');
+    this.router.navigate(['/inicio']);
   }
-  }
+}
