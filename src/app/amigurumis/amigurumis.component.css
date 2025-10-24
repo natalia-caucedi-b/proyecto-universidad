@@ -1,0 +1,171 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #ffffff;
+  color: #333333;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #f3e8ff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #020202;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #000000;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #9b5de5;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(to right, #fceaff, #f8f0ff);
+  color: #7b2cbf;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.header p {
+  font-size: 1.2rem;
+  color: #6b4f9c;
+}
+
+/* Galería */
+.galeria {
+  padding: 3rem 2rem;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.galeria h2 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #7b2cbf;
+}
+
+.productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.producto {
+  background: #f9f4ff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.producto:hover {
+  transform: scale(1.03);
+}
+
+.producto img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.producto p {
+  color: #6b4f9c;
+}
+
+/* Contacto */
+.contacto {
+  background-color: #f3e8ff;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.contacto h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #7b2cbf;
+}
+
+.contacto form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contacto input,
+.contacto textarea {
+  padding: 0.75rem;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #333;
+}
+
+.contacto input::placeholder,
+.contacto textarea::placeholder {
+  color: #aaa;
+}
+
+.contacto button {
+  background-color: #9b5de5;
+  color: #fff;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contacto button:hover {
+  background-color: #7b2cbf;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #f3e8ff;
+  color: #6b4f9c;
+  margin-top: 2rem;
+}
+
+.contactos {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #7b2cbf;
+}

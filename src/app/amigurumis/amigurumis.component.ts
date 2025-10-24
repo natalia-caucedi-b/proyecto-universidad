@@ -1,18 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { CarritoService } from '../carrito/carrito.service';
-import { ButtonModule, ButtonDirective } from 'primeng/button';
-import { RadioButtonModule } from 'primeng/radiobutton';
-import { Router } from '@angular/router';
+import { MenuItem } from 'primeng/api';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 @Component({
   selector: 'app-galeria',
-  templateUrl: './galeria.component.html',
-  styleUrls: ['./galeria.component.css'],
+  templateUrl: './amigurumis.component.html',
+  styleUrls: ['./amigurumis.component.css'],
   standalone: true,
-  imports: [CommonModule, ButtonModule],
+  imports: [CommonModule, BreadcrumbModule],
 })
 export class GaleriaComponent implements OnInit {
+  items: MenuItem[] | undefined;
+
+  home: MenuItem | undefined;
   productos = [
     {
       nombre: 'Amigurumi',
@@ -36,18 +38,22 @@ export class GaleriaComponent implements OnInit {
       descripcion: '',
     },
   ];
-  constructor(private carritoService: CarritoService, private router: Router) {}
+  constructor(private carritoService: CarritoService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.items = [
+      { label: 'amigurumis' },
+      { label: 'ropa' },
+      { label: 'Accesorios' },
+      { label: 'maletas' },
+      { label: 'moñas' },
+    ];
+
+    this.home = { icon: 'pi pi-home', routerLink: '/' };
+  }
 
   irCarrito(item: any) {
     console.log('Agregado al carrito:', item);
     this.carritoService.agregarProducto(item);
-  }
-
-  verMas() {
-    console.log('debe llevar a');
-    // Redirige al componente Amigurumis
-    this.router.navigate(['/amigurumis']);
   }
 }

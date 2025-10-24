@@ -5,7 +5,14 @@
       <img [src]="item.imagen" [alt]="item.nombre" />
       <h3>{{ item.nombre }}</h3>
       <p>{{ item.descripcion }}</p>
-      <div><button (click)="irCarrito(item)">compra</button></div>
+      <div class="card flex justify-center">
+        <p-button
+          label="ver mas"
+          icon="pi pr-arrow-right"
+          (onClick)="verMas()"
+        >
+        </p-button>
+      </div>
     </div>
   </div>
 </section>

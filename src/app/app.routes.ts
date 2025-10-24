@@ -4,9 +4,11 @@ import { InicioComponent } from './inicio/inicio.component';
 import { AdministradorComponent } from './administrador/administrador.component';
 import { RegistroComponent } from './registro/registro.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { GaleriaComponent } from './amigurumis/amigurumis.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+   { path: 'amigurumis', component: GaleriaComponent },
   { path: 'home', component: InicioComponent },
   { path: 'ingresar', component: LoginComponent },
   { path: 'admin', component: AdministradorComponent },

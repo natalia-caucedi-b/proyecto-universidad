@@ -1,4 +1,4 @@
-<div style="display: flex; justify-content: end;">
+<div style="display: flex; justify-content: end">
   <button
     pButton
     type="button"
@@ -18,7 +18,7 @@
     label="Agregar Producto"
     icon="pi pi-plus"
     class="p-mb-4 add-button"
-    (click)="mostrarDialog()"
+    (click)="nuevoProducto()"
   ></button>
 
   <p-table
@@ -31,6 +31,8 @@
       <tr>
         <th>Nombre</th>
         <th>Imagen</th>
+        <th>Precio</th>
+        <th>Stock</th>
         <th>Descripción</th>
         <th>Acciones</th>
       </tr>
@@ -39,6 +41,7 @@
     <ng-template pTemplate="body" let-producto>
       <tr>
         <td>{{ producto.nombre }}</td>
+
         <td>
           <img
             [src]="producto.imagen"
@@ -47,6 +50,8 @@
             class="product-image"
           />
         </td>
+        <td>$ {{ producto.precio }}</td>
+        <td>{{ producto.stock }}</td>
         <td>{{ producto.descripcion }}</td>
         <td>
           <button
@@ -76,7 +81,7 @@
     [(visible)]="productoDialog"
     [modal]="true"
     [closable]="false"
-    [style]="{ width: '450px' }"
+    [style]="{ width: '50%' }"
   >
     <form
       [formGroup]="productoForm"
@@ -84,6 +89,7 @@
       class="product-form"
     >
       <div class="p-fluid p-formgrid p-grid">
+        <!-- Nombre -->
         <div class="p-field p-col-12">
           <label for="nombre">Nombre <span class="required">*</span></label>
           <input id="nombre" type="text" pInputText formControlName="nombre" />
@@ -98,9 +104,17 @@
           </small>
         </div>
 
+        <!-- Descripción -->
         <div class="p-field p-col-12">
-          <label for="descripcion">Descripción <span class="required">*</span></label>
-          <input id="descripcion" type="text" pInputText formControlName="descripcion" />
+          <label for="descripcion"
+            >Descripción <span class="required">*</span></label
+          >
+          <textarea
+            id="descripcion"
+            rows="3"
+            pInputTextarea
+            formControlName="descripcion"
+          ></textarea>
           <small
             *ngIf="
               productoForm.get('descripcion')?.invalid &&
@@ -112,6 +126,49 @@
           </small>
         </div>
 
+        <!-- Precio -->
+        <div class="p-field p-col-6">
+          <label for="precio">Precio <span class="required">*</span></label>
+          <input
+            id="precio"
+            type="number"
+            pInputText
+            formControlName="precio"
+            min="0"
+          />
+          <small
+            *ngIf="
+              productoForm.get('precio')?.invalid &&
+              productoForm.get('precio')?.touched
+            "
+            class="p-error"
+          >
+            Ingresa un precio válido.
+          </small>
+        </div>
+
+        <!-- Stock -->
+        <div class="p-field p-col-6">
+          <label for="stock">Stock <span class="required">*</span></label>
+          <input
+            id="stock"
+            type="number"
+            pInputText
+            formControlName="stock"
+            min="0"
+          />
+          <small
+            *ngIf="
+              productoForm.get('stock')?.invalid &&
+              productoForm.get('stock')?.touched
+            "
+            class="p-error"
+          >
+            Ingresa la cantidad en stock.
+          </small>
+        </div>
+
+        <!-- Imagen -->
         <div class="p-field p-col-12">
           <label for="imagen">Imagen</label>
           <input
@@ -120,7 +177,9 @@
             (change)="onFileSelected($event)"
             accept="image/*"
           />
-          <small *ngIf="imagenPreview" class="preview-label">Vista previa:</small>
+          <small *ngIf="imagenPreview" class="preview-label"
+            >Vista previa:</small
+          >
           <img
             *ngIf="imagenPreview"
             [src]="imagenPreview"
@@ -130,27 +189,31 @@
           />
         </div>
       </div>
-      <div>
-        <div class="dialog-footer">
-          <button
-            pButton
-            type="submit"
-            label="Guardar"
-            icon="pi pi-check"
-            [disabled]="productoForm.invalid"
-            class="save-btn"
-          ></button>
 
-          <button
-            pButton
-            type="button"
-            label="Cancelar"
-            icon="pi pi-times"
-            class="p-button-secondary cancel-btn"
-            (click)="cancelar()"
-          ></button>
-        </div>
+      <!-- Botones -->
+      <div class="dialog-footer">
+        <button
+          pButton
+          type="submit"
+          label="Guardar"
+          icon="pi pi-check"
+          [disabled]="productoForm.invalid"
+          class="save-btn"
+        ></button>
+
+        <button
+          pButton
+          type="button"
+          label="Cancelar"
+          icon="pi pi-times"
+          class="p-button-secondary cancel-btn"
+          (click)="cancelar()"
+        ></button>
       </div>
     </form>
   </p-dialog>
 </div>
+<!-- Muestra el mensaje de exito, error, etc -->
+<p-toast></p-toast>
+<!-- Muestra el modal de confirmacion -->
+<p-confirmDialog></p-confirmDialog>

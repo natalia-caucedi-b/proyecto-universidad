@@ -1,1 +1,26 @@
-<h1>Proceso de registro</h1>
+<div class="registro-container">
+  <h2>Crea una Cuenta</h2>
+  <p>Ingresa tus datos</p>
+
+  <div class="field">
+    <input
+      pInputText
+      type="text"
+      placeholder="Nombre"
+      [(ngModel)]="nombre"
+    />
+
+  <div class="field">
+    <input
+      pInputText
+      type="text"
+      placeholder="correo"
+      [(ngModel)]="correo"
+    />
+  </div>
+
+  </div>
+
+  <!-- Botón Siguiente -->
+  <button pButton label="Siguiente" (click)="siguiente()"></button>
+</div>

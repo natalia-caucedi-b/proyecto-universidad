@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-contacto',
   templateUrl: './contacto.component.html',

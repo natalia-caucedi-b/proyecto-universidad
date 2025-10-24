@@ -1,0 +1,23 @@
+<nav class="navbar">
+  <div class="logo">Mis Tejidos</div>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#galeriaProductos">Galería</a></li>
+    <li><a routerLink="/ingresar">Ingresar</a></li>
+    <li><a routerLink="/carrito">carrito</a></li>
+    
+  </ul>
+</nav>
+
+<p-breadcrumb [model]="items" [home]="home" />
+<section class="galeria">
+  <h2>Amigurumis</h2>
+  <div class="productos">
+    <div class="producto" *ngFor="let item of productos">
+      <img width="300px" [src]="item.imagen" [alt]="item.nombre" />
+      <h3>{{ item.nombre }}</h3>
+      <p>{{ item.descripcion }}</p>
+      <div><button (click)="irCarrito(item)">compra</button></div>
+    </div>
+  </div>
+</section>
