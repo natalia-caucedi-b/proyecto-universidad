@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
+import { ProductosService } from '../administrador/servicios/productos.service';
 
 @Component({
   selector: 'app-productosG',
@@ -9,42 +10,25 @@ import { CarouselModule } from 'primeng/carousel';
   styleUrls: ['./productosG.component.css'],
   imports: [CommonModule, ButtonModule, CarouselModule],
   standalone: true,
+  providers: [ProductosService],
 })
 export class ProductosGComponent implements OnInit {
-  productos!: any[];
+  productos: any[] = [];
   responsiveOptions: any[] | undefined;
-  constructor() {}
+  constructor(private productosService: ProductosService) {}
 
   ngOnInit() {
-    this.productos = [
-      {
-        nombre: 'Hilo nubre color fucsia',
-        imagen: 'assets/img/1.jpg',
+    this.cargarProductos();
+  }
+
+  cargarProductos() {
+    this.productosService.obtenerProductos().subscribe({
+      next: (data) => {
+        this.productos = data;
       },
-      {
-        nombre: 'Hilo nubre color azul',
-        imagen: 'assets/img/2.jpg',
+      error: (err) => {
+        console.error('Error al obtener productos', err);
       },
-      {
-        nombre: 'hilo nube arcoiris',
-        imagen: 'assets/img/3.jpg',
-      },
-      {
-        nombre: 'Hilo nube color gris',
-        imagen: 'assets/img/4.png',
-      },
-      {
-        nombre: 'Hilo nube color rojo',
-        imagen: 'assets/img/5.png',
-      },
-      {
-        nombre: 'felting de mascotas',
-        imagen: 'assets/img/felting.jpg',
-      },
-      {
-        nombre: 'gorros a macrame',
-        imagen: 'assets/img/gorros.jpg',
-      },
-    ];
+    });
   }
 }

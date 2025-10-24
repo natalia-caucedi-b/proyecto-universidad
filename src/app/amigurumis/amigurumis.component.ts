@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CarritoService } from '../carrito/carrito.service';
 import { MenuItem } from 'primeng/api';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { ProductosService } from '../administrador/servicios/productos.service';
 
 @Component({
   selector: 'app-galeria',
@@ -15,32 +16,14 @@ export class GaleriaComponent implements OnInit {
   items: MenuItem[] | undefined;
 
   home: MenuItem | undefined;
-  productos = [
-    {
-      nombre: 'Amigurumi',
-      imagen: 'assets/img/amigurumi.png',
-    },
-    {
-      nombre: 'ropa a crochet',
-      imagen: 'assets/img/ropa.jpg',
-    },
-    {
-      nombre: 'macrame',
-      imagen: 'assets/img/macrame.png',
-    },
-    {
-      nombre: 'Hilos',
-      imagen: 'assets/img/hilos.jpg',
-    },
-    {
-      nombre: 'Moñas',
-      imagen: 'assets/img/moñas.png',
-      descripcion: '',
-    },
-  ];
-  constructor(private carritoService: CarritoService) {}
+  productos: any[] = [];
+  constructor(
+    private carritoService: CarritoService,
+    private productosService: ProductosService
+  ) {}
 
   ngOnInit() {
+    this.cargarProductos();
     this.items = [
       { label: 'amigurumis' },
       { label: 'ropa' },
@@ -55,5 +38,15 @@ export class GaleriaComponent implements OnInit {
   irCarrito(item: any) {
     console.log('Agregado al carrito:', item);
     this.carritoService.agregarProducto(item);
+  }
+  cargarProductos() {
+    this.productosService.obtenerProductos().subscribe({
+      next: (data) => {
+        this.productos = data;
+      },
+      error: (err) => {
+        console.error('Error al obtener productos', err);
+      },
+    });
   }
 }

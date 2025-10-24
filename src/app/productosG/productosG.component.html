@@ -1,20 +1,10 @@
-<!-- <section class="galeria">
-  <h2>Galeria de Productos</h2>
-  <div class="productos">
-    <div class="producto" *ngFor="let item of productos">
-      <img [src]="item.imagen" [alt]="item.nombre" />
-      <h3>{{ item.nombre }}</h3>
-    </div>
-  </div>
-</section> -->
-
 <section class="galeria">
   <h2>Nuestros Productos</h2>
 
   <div class="card">
     <p-carousel
       [value]="productos"
-      [numVisible]="3"
+      [numVisible]="1"
       [numScroll]="1"
       [circular]="true"
       [responsiveOptions]="responsiveOptions"

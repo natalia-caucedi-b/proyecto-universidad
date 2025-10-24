@@ -10,18 +10,22 @@ export class ProductosService {
 
   constructor(private http: HttpClient) {}
 
+  // Permite obtener los productos
   obtenerProductos(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 
+  // Permite la cracion de los productos
   crearProducto(producto: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, producto);
   }
 
+  // Permite actualizar los productos
   actualizarProducto(id: number, data: any) {
-  return this.http.patch(`${this.apiUrl}/${id}`, data);
-}
+    return this.http.patch(`${this.apiUrl}/${id}`, data);
+  }
 
+  // Permite eliminar los productos
   eliminarProducto(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }

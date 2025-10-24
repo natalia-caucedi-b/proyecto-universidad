@@ -4,6 +4,7 @@ import { CarritoService } from '../carrito/carrito.service';
 import { ButtonModule, ButtonDirective } from 'primeng/button';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { Router } from '@angular/router';
+import { ProductosService } from '../administrador/servicios/productos.service';
 
 @Component({
   selector: 'app-galeria',
@@ -11,38 +12,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./galeria.component.css'],
   standalone: true,
   imports: [CommonModule, ButtonModule],
+  providers: [ProductosService],
 })
 export class GaleriaComponent implements OnInit {
-  productos = [
-    {
-      nombre: 'Amigurumi',
-      imagen: 'assets/img/amigurumi.png',
-    },
-    {
-      nombre: 'ropa a crochet',
-      imagen: 'assets/img/ropa.jpg',
-    },
-    {
-      nombre: 'macrame',
-      imagen: 'assets/img/macrame.png',
-    },
-    {
-      nombre: 'Hilos',
-      imagen: 'assets/img/hilos.jpg',
-    },
-    {
-      nombre: 'Moñas',
-      imagen: 'assets/img/moñas.png',
-      descripcion: '',
-    },
-  ];
-  constructor(private carritoService: CarritoService, private router: Router) {}
+  productos: any[] = [];
+  constructor(
+    private carritoService: CarritoService,
+    private router: Router,
+    private productosService: ProductosService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.cargarProductos();
+  }
 
   irCarrito(item: any) {
     console.log('Agregado al carrito:', item);
     this.carritoService.agregarProducto(item);
+  }
+
+  cargarProductos() {
+    this.productosService.obtenerProductos().subscribe({
+      next: (data) => {
+        this.productos = data;
+      },
+      error: (err) => {
+        console.error('Error al obtener productos', err);
+      },
+    });
   }
 
   verMas() {
