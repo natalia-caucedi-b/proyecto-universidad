@@ -43,6 +43,7 @@ export class AdministradorComponent implements OnInit {
   visibleEditar = false;
   productoSeleccionado: any;
   dialogTitle = 'Nuevo producto';
+  nombreUsuario: string | null = '';
 
   constructor(
     private fb: FormBuilder,
@@ -62,6 +63,7 @@ export class AdministradorComponent implements OnInit {
 
   ngOnInit() {
     this.cargarProductos();
+    this.nombreUsuario = localStorage.getItem('nombreAdmin');
   }
 
   cargarProductos() {
@@ -220,6 +222,7 @@ export class AdministradorComponent implements OnInit {
 
   cerrarSesion() {
     console.log('pasa por aqui');
+     localStorage.removeItem('nombreAdmin');
     this.router.navigate(['/inicio']);
   }
 }
